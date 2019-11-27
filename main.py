@@ -8,9 +8,11 @@ import pygame
 #colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
 
 
 #sizes
@@ -222,7 +224,7 @@ class player():
 
     def draw(self):
         if self.playing:
-            pygame.draw.rect(screen, GREEN, self.rect, 1)
+            pygame.draw.rect(screen, GREEN, self.rect, 2)
         else:
             pygame.draw.rect(screen, BLACK, self.rect, 1)
 
@@ -322,9 +324,23 @@ class turn_handler():
 
 class special_card_handler():
     def __init__(self):
-        pass
+        self.wildcard_in_middle = False
 
     def wildcard(self, color):
+        wildcard_red_button = font_small.render('Red', True, BLACK)
+        wildcard_red_button_rect = wildcard_red_button.get_rect()
+
+        wildcard_green_button = font_small.render('Green', True, BLACK)
+        wildcard_green_button_rect = wildcard_green_button.get_rect()
+
+        wildcard_blue_button = font_small.render('Blue', True, BLACK)
+        wildcard_blue_button_rect = wildcard_blue_button.get_rect()
+
+        wildcard_yellow_button = font_small.render('Yellow', True, BLACK)
+        wildcard_yellow_button_rect = wildcard_yellow_button.get_rect()
+
+        self.wildcard_in_middle = True
+
         play_card(blank_cards[color])
 
     def reverse(self):
@@ -465,7 +481,7 @@ if __name__ == '__main__':
     play_card(card)
 
     #create draw button
-    draw_button = font_default.render('DRAW', True, BLACK)
+    draw_button = font_default.render('Draw', True, BLACK)
     draw_button_rect = draw_button.get_rect()
     draw_button_rect[0] = screen_rect.centerx - (draw_button_rect[2]/2) + 100
     draw_button_rect[1] = screen_rect.centery - (draw_button_rect[3]/2)
