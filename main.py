@@ -316,8 +316,8 @@ class turn_handler():
             if overshoot >= 0:
                 self.index = overshoot
         else:
-            if overshoot < -player_count - 1:
-                self.index = player_count - (player_count + overshoot) - 1
+            if overshoot < -player_count:
+                self.index = player_count - (player_count + overshoot) - 2
 
 
 class special_card_handler():
@@ -353,7 +353,7 @@ def play_card(card, p=None):
     middle.append(card)
 
     if not card[1].isdigit():
-        getattr(special_card_handler, card[1])
+        getattr(special_card_handler, card[1])()
 
     global draw_once
     draw_once = True
@@ -377,7 +377,7 @@ def take_cards_from_deck(card_count, p=None):
 
 def validate_card(card):
     middle_card = middle[-1]
-    if card[0] == 'black' or middle_card[1] == '+4' or card[0] == middle_card[0] or card[1] == middle_card[1]:
+    if card[0] == 'black' or middle_card[1] == 'plus4' or card[0] == middle_card[0] or card[1] == middle_card[1]:
         return True
     else:
         return False
@@ -449,6 +449,7 @@ if __name__ == '__main__':
     player_count = len(players)
     middle = []
     turn_handler = turn_handler()
+    special_card_handler = special_card_handler()
 
 
     #creating the players

@@ -5,12 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2e62768-9977-4328-8a40-bbf1098e37a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/black_+4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/blue_+2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/green_+2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/red_+2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/yellow_+2.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="446" column="22" selection-start-line="446" selection-start-column="22" selection-end-line="446" selection-end-column="22" />
+            <state relative-caret-position="352">
+              <caret line="313" column="45" lean-forward="true" selection-start-line="313" selection-start-column="45" selection-end-line="313" selection-end-column="45" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -234,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574834643769</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added card treats">
+      <created>1574840767326</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1574840767326</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -262,7 +263,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="idk" />
-    <option name="LAST_COMMIT_MESSAGE" value="idk" />
+    <MESSAGE value="added card treats" />
+    <option name="LAST_COMMIT_MESSAGE" value="added card treats" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/card game/clubs.png" />
@@ -273,8 +275,8 @@
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/random.py" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="446" column="22" selection-start-line="446" selection-start-column="22" selection-end-line="446" selection-end-column="22" />
+        <state relative-caret-position="352">
+          <caret line="313" column="45" lean-forward="true" selection-start-line="313" selection-start-column="45" selection-end-line="313" selection-end-column="45" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
