@@ -4,7 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/main.py" line="32" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2e62768-9977-4328-8a40-bbf1098e37a3" name="Default Changelist" comment="" />
+    <list default="true" id="a2e62768-9977-4328-8a40-bbf1098e37a3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/UNO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UNO.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="342" selection-start-line="342" selection-end-line="342" />
+            <state relative-caret-position="253">
+              <caret line="76" column="50" lean-forward="true" selection-start-line="76" selection-start-column="50" selection-end-line="76" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -50,6 +55,7 @@
       <find>player_count</find>
       <find>take_cards_from_deck</find>
       <find>font_big</find>
+      <find>wildcard_in_middle</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -73,6 +79,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -84,7 +91,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -162,12 +168,12 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="D:\Data\School\Programeren\Eigen_Projecten\python\UNO\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="D:\Data\School\Programeren\Eigen_Projecten\python\UNO\card game\main.py" />
+      <option name="SCRIPT_NAME" value="D:/Data/School/Programeren/Eigen_Projecten/python/UNO/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -200,8 +206,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main (1)" />
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -269,8 +275,8 @@
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/random.py" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="342" selection-start-line="342" selection-end-line="342" />
+        <state relative-caret-position="253">
+          <caret line="76" column="50" lean-forward="true" selection-start-line="76" selection-start-column="50" selection-end-line="76" selection-end-column="50" />
         </state>
       </provider>
     </entry>

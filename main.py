@@ -74,7 +74,7 @@ for color in colors:
         deck.append([color, special, card, None])
 
     card = pygame.image.load("images/" + color + ".png").convert_alpha()
-    blank_cards[color] = [color, "none", card, None]
+    blank_cards[color] = [color, "-1", card, None]
 
 for special in black_specials:
     for i in range(4):
@@ -324,22 +324,30 @@ class turn_handler():
 
 class special_card_handler():
     def __init__(self):
-        self.wildcard_in_middle = False
+        self.choose_wildcard = False
 
-    def wildcard(self, color):
-        wildcard_red_button = font_small.render('Red', True, BLACK)
-        wildcard_red_button_rect = wildcard_red_button.get_rect()
+    def wildcard(self):
+        current_player_rect = turn_handler.current_player.rect
 
-        wildcard_green_button = font_small.render('Green', True, BLACK)
-        wildcard_green_button_rect = wildcard_green_button.get_rect()
+        self.wildcard_red_button = font_small.render('Red', True, BLACK)
+        self.wildcard_red_button_rect = self.wildcard_red_button.get_rect()
 
-        wildcard_blue_button = font_small.render('Blue', True, BLACK)
-        wildcard_blue_button_rect = wildcard_blue_button.get_rect()
+        self.wildcard_green_button = font_small.render('Green', True, BLACK)
+        self.wildcard_green_button_rect = self.wildcard_green_button.get_rect()
 
-        wildcard_yellow_button = font_small.render('Yellow', True, BLACK)
-        wildcard_yellow_button_rect = wildcard_yellow_button.get_rect()
+        self.wildcard_blue_button = font_small.render('Blue', True, BLACK)
+        self.wildcard_blue_button_rect = self.wildcard_blue_button.get_rect()
 
-        self.wildcard_in_middle = True
+        self.wildcard_yellow_button = font_small.render('Yellow', True, BLACK)
+        self.wildcard_yellow_button_rect = self.wildcard_yellow_button.get_rect()
+
+        # self.wildcard_red_button_rect[0] = current_player_rect.centerx - 10 - self.wildcard_green_button_rect[2] - 20 - self.wildcard_red_button[2]
+        # self.wildcard_green_button_rect[0] = current_player_rect.centerx - 10 - self.wildcard_green_button_rect[2]
+        # self.wildcard_blue_button_rect[0] = current_player_rect.centerx + 10
+        # self.wildcard_yellow_button_rect[0] = current_player_rect.centerx + 10 + self.wildcard_blue_button_rect[2] + 20
+
+
+        self.choose_wildcard = True
 
         play_card(blank_cards[color])
 
@@ -443,6 +451,13 @@ def draw():
     for p in players:
         p.draw()
 
+    if special_card_handler.choose_wildcard:
+        screen.blit(special_card_handler.wildcard_red_button, special_card_handler.wildcard_red_button_rect)
+        screen.blit(special_card_handler.wildcard_green_button, special_card_handler.wildcard_green_button_rect)
+        screen.blit(special_card_handler.wildcard_blue_button, special_card_handler.wildcard_blue_button_rect)
+        screen.blit(special_card_handler.wildcard_yellow_button, special_card_handler.wildcard_yellow_button_rect)
+
+
     pygame.display.update()
 
     global draw_once
@@ -456,7 +471,6 @@ if __name__ == '__main__':
     #game variables
     delta = 1/FPS
     players = [
-        human_player(),
         human_player(),
         human_player(),
         human_player(),
