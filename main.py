@@ -73,6 +73,10 @@ for color in colors:
         card = pygame.image.load("images/" + color + "_" + special + ".png").convert_alpha()
         deck.append([color, special, card, None])
 
+    for special in colored_specials:
+        card = pygame.image.load("images/" + color + "_" + special + ".png").convert_alpha()
+        deck.append([color, special, card, None])
+
     card = pygame.image.load("images/" + color + ".png").convert_alpha()
     blank_cards[color] = [color, "none", card, None]
 
@@ -178,14 +182,63 @@ class player():
         self.update_cards()
 
     def update_cards(self):
-        self.sort_hand()
-
         self.card_count = font_default.render(str(len(self.hand)), True, BLACK)
         self.card_count_rect = self.card_count.get_rect()
         self.card_count_rect[0] = (self.rect.right - self.card_count_rect[2]) - 10
         self.card_count_rect[1] = (self.y + 10)
 
         self.update_card_positions()
+
+    def get_second_index(self, val):
+        return val[1]
+
+    def update_card_positions(self):
+        card_x = self.x
+        card_y = self.y
+        max_card_x = self.rect.right - CARD_WIDTH - self.card_count_rect[2] - 10
+        for card in self.hand:
+            if card_x > max_card_x:
+                card_x = self.x
+                card_y += CARD_HEIGHT + 3
+
+            card[3][0] = card_x
+            card[3][1] = card_y
+
+            card_x += CARD_WIDTH + 3
+
+    def update(self):
+        pass
+
+
+    def draw(self):
+        if self.playing:
+            pygame.draw.rect(screen, GREEN, self.rect, 2)
+        else:
+            pygame.draw.rect(screen, BLACK, self.rect, 1)
+
+        for card in self.hand:
+            if isinstance(self, human_player) and self.playing:
+                screen.blit(card[2], card[3])
+            else:
+                screen.blit(blank_cards["black"][2], card[3])
+
+        screen.blit(self.player_type, self.player_type_rect)
+
+        screen.blit(self.card_count, self.card_count_rect)
+
+
+
+
+
+#human player class
+class human_player(player):
+    def __init__(self):
+        player.__init__(self)
+        self.player_type = font_default.render('H', True, BLACK)
+
+    def update_cards(self):
+        self.sort_hand()
+        player.update_cards(self)
 
     def sort_hand(self):
         red_cards = []
@@ -226,50 +279,6 @@ class player():
             "yellow": len(yellow_cards),
             "black": len(black_cards),
         }
-
-    def get_second_index(self, val):
-        return val[1]
-
-    def update_card_positions(self):
-        card_x = self.x
-        card_y = self.y
-        max_card_x = self.rect.right - CARD_WIDTH - self.card_count_rect[2] - 10
-        for card in self.hand:
-            if card_x > max_card_x:
-                card_x = self.x
-                card_y += CARD_HEIGHT + 3
-
-            card[3][0] = card_x
-            card[3][1] = card_y
-
-            card_x += CARD_WIDTH + 3
-
-    def update(self):
-        pass
-
-
-    def draw(self):
-        if self.playing:
-            pygame.draw.rect(screen, GREEN, self.rect, 2)
-        else:
-            pygame.draw.rect(screen, BLACK, self.rect, 1)
-
-        for card in self.hand:
-            screen.blit(card[2], card[3])
-
-        screen.blit(self.player_type, self.player_type_rect)
-
-        screen.blit(self.card_count, self.card_count_rect)
-
-
-
-
-
-#human player class
-class human_player(player):
-    def __init__(self):
-        player.__init__(self)
-        self.player_type = font_default.render('H', True, BLACK)
 
     def update(self):
         player.update(self)
@@ -538,7 +547,7 @@ if __name__ == '__main__':
     delta = 1/FPS
     players = [
         human_player(),
-        ai_player(),
+        human_player(),
         ai_player(),
         ai_player()
     ]
