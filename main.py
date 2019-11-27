@@ -1,4 +1,4 @@
-import sys, random, enum
+import sys, random
 import pygame
 
 
@@ -11,7 +11,7 @@ BLACK = (0, 0, 0)
 
 
 #sizes
-SCREEN_WIDTH = 750
+SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 750
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 
@@ -19,7 +19,7 @@ CARD_HEIGHT = 50
 CARD_WIDTH = int((CARD_HEIGHT/3) * 2)
 CARD_SIZE = (CARD_WIDTH, CARD_HEIGHT)
 
-PLAYER_FIELD_WIDTH = 200
+PLAYER_FIELD_WIDTH = 250
 PLAYER_FIELD_HEIGHT = 200
 PLAYER_FIELD_SIZE = (PLAYER_FIELD_WIDTH, PLAYER_FIELD_HEIGHT)
 
@@ -57,24 +57,26 @@ black_specials = ['+4', 'wildcard']
 for color in colors:
     for i in range(10):
         card = pygame.image.load("images/" + color + "_" + str(i) + ".png").convert_alpha()
-        card = pygame.transform.scale(card, CARD_SIZE)
-        deck.append([color, str(i), card, card.get_rect()])
+        deck.append([color, str(i), card, None])
 
     for i in range(1, 10):
         card = pygame.image.load("images/" + color + "_" + str(i) + ".png").convert_alpha()
-        card = pygame.transform.scale(card, CARD_SIZE)
-        deck.append([color, str(i), card, card.get_rect()])
+        deck.append([color, str(i), card, None])
 
     for special in colored_specials:
         card = pygame.image.load("images/" + color + "_" + special + ".png").convert_alpha()
-        card = pygame.transform.scale(card, CARD_SIZE)
-        deck.append([color, special, card, card.get_rect()])
+        deck.append([color, special, card, None])
 
 for special in black_specials:
     for i in range(4):
         card = pygame.image.load("images/black_" + special + ".png").convert_alpha()
-        card = pygame.transform.scale(card, CARD_SIZE)
-        deck.append(['black', special, card, card.get_rect()])
+        deck.append(['black', special, card, None])
+
+
+for card in deck:
+    card[2] = pygame.transform.scale(card[2], CARD_SIZE)
+    card[3] = card[2].get_rect()
+
 
 red_card = pygame.image.load("images/" + 'red' + ".png").convert_alpha()
 red_card = pygame.transform.scale(red_card, CARD_SIZE)
@@ -169,6 +171,16 @@ class player():
         self.hand.remove(object)
         self.update_cards()
 
+    def update_cards(self):
+        self.sort_hand()
+
+        self.card_count = font_big.render(str(len(self.hand)), True, BLACK)
+        self.card_count_rect = self.card_count.get_rect()
+        self.card_count_rect[0] = (self.rect.right - self.card_count_rect[2]) - 10
+        self.card_count_rect[1] = (self.y + 10)
+
+        self.update_card_positions()
+
     def sort_hand(self):
         red_cards = []
         green_cards = []
@@ -189,28 +201,20 @@ class player():
 
         self.hand = blue_cards + green_cards + red_cards + yellow_cards + black_cards
 
-    def update_cards(self):
-        self.sort_hand()
-        self.update_card_positions()
-
-        self.card_count = font_big.render(str(len(self.hand)), True, BLACK)
-        self.card_count_rect = self.card_count.get_rect()
-        self.card_count_rect[0] = (self.rect.right - self.card_count_rect[2]) - 10
-        self.card_count_rect[1] = (self.y + 10)
 
     def update_card_positions(self):
         card_x = self.x
         card_y = self.y
-        max_card_x = self.rect.right - CARD_WIDTH - 30
+        max_card_x = self.rect.right - CARD_WIDTH - self.card_count_rect[2] - 10
         for card in self.hand:
             if card_x > max_card_x:
                 card_x = self.x
-                card_y += CARD_HEIGHT + 5
+                card_y += CARD_HEIGHT + 3
 
             card[3][0] = card_x
             card[3][1] = card_y
 
-            card_x += CARD_WIDTH + 5
+            card_x += CARD_WIDTH + 3
 
     def update(self):
         pass
@@ -268,11 +272,8 @@ class ai_player(player):
 #   GAME LOGIC CLASSES
 class turn_handler():
     def __init__(self):
-        self.index = 0
-        self.direction = True
-
-    def start_game(self):
         self.index = random.randint(0, player_count - 1)
+        self.direction = True
 
     def switch_direction(self):
         if self.direction:
@@ -281,7 +282,11 @@ class turn_handler():
             self.direction = True
 
     def skip(self):
-        pass
+        if self.direction:
+            self.index += 2
+        else:
+            self.index -= 2
+        self.fix_index_oor()
 
     def end_turn(self):
         if self.direction:
@@ -296,8 +301,8 @@ class turn_handler():
             if overshoot >= 0:
                 self.index = overshoot
         else:
-            if overshoot < -player_count:
-                self.index = player_count - (player_count + overshoot) - 2
+            if overshoot < -player_count - 1:
+                self.index = player_count - (player_count + overshoot) - 1
 
 
 
@@ -308,14 +313,14 @@ def play_card(card, p=None):
         p.del_card_by_object(card)
     card[2] = pygame.transform.scale2x(card[2])
     card[3] = card[2].get_rect()
-    card[3][0] = (screen_rect.right / 2) - (card[3][2] / 2)
-    card[3][1] = (screen_rect.bottom / 2) - (card[3][3] / 2)
+    card[3][0] = screen_rect.centerx - (card[3][2] / 2)
+    card[3][1] = screen_rect.centery - (card[3][3] / 2)
     middle.append(card)
 
 
-def take_cards_from_deck(draw_count, p=None):
+def take_cards_from_deck(card_count, p=None):
     cards = []
-    for i in range(draw_count):
+    for i in range(card_count):
         rand_num = random.randint(0, len(deck) - 1)
         cards.append(deck[rand_num])
         del deck[rand_num]
@@ -338,16 +343,18 @@ def validate_card(card):
 def update():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            return False
+            global run
+            run = False
 #        elif event.type == pygame.KEYDOWN:
 #            if event.key == pygame.K_s:
 #                pass
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = event.pos
+
             click_found = False
             for p in players:
                 if not click_found:
                     if isinstance(p, human_player):
-                        mouse_x, mouse_y = event.pos
                         if p.rect.collidepoint(mouse_x, mouse_y):
                             click_found = True
                             for card in p.hand:
@@ -360,8 +367,6 @@ def update():
 
     for p in players:
         p.update()
-
-    return True
 
 
 #main draw function (this is where all the other draw functions are called from)
@@ -409,7 +414,7 @@ if __name__ == '__main__':
     run = True
     while run:
         delta = clock.tick(FPS)
-        run = update()
+        update()
         draw()
 
 
