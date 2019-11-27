@@ -74,11 +74,15 @@ for color in colors:
         deck.append([color, special, card, None])
 
     card = pygame.image.load("images/" + color + ".png").convert_alpha()
-    blank_cards[color] = [color, "-1", card, None]
+    blank_cards[color] = [color, "none", card, None]
+
+card = pygame.image.load("images/" + "black" + ".png").convert_alpha()
+blank_cards["black"] = ["black", "none", card, None]
+
 
 for special in black_specials:
     for i in range(4):
-        card = pygame.image.load("images/black_" + special + ".png").convert_alpha()
+        card = pygame.image.load("images/" + "black_" + special + ".png").convert_alpha()
         deck.append(['black', special, card, None])
 
 
@@ -201,8 +205,30 @@ class player():
             else:
                 black_cards.append(card)
 
-        self.hand = blue_cards + green_cards + red_cards + yellow_cards + black_cards
+        cards_per_color = [blue_cards, green_cards, red_cards, yellow_cards, black_cards]
 
+        self.hand = []
+        for cards in cards_per_color:
+            special_cards = []
+            numbered_cards = []
+            for card in cards:
+                if card[1].isdigit():
+                    numbered_cards.append(card)
+                else:
+                    special_cards.append(card)
+            numbered_cards.sort(key=self.get_second_index)
+            self.hand += numbered_cards + special_cards
+
+        self.color_counts = {
+            "red": len(red_cards),
+            "green": len(green_cards),
+            "blue": len(blue_cards),
+            "yellow": len(yellow_cards),
+            "black": len(black_cards),
+        }
+
+    def get_second_index(self, val):
+        return val[1]
 
     def update_card_positions(self):
         card_x = self.x
@@ -265,6 +291,10 @@ class ai_player(player):
                 return
         take_cards_from_deck(1, self)
 
+    def choose_color(self):
+        return max(self.color_counts, key=self.color_counts.get)
+
+
     def update(self):
         player.update(self)
         if self.playing:
@@ -326,30 +356,41 @@ class special_card_handler():
     def __init__(self):
         self.choose_wildcard = False
 
-    def wildcard(self):
-        current_player_rect = turn_handler.current_player.rect
 
-        self.wildcard_red_button = font_small.render('Red', True, BLACK)
+        self.wildcard_red_button = font_small.render('Red', True, RED)
         self.wildcard_red_button_rect = self.wildcard_red_button.get_rect()
 
-        self.wildcard_green_button = font_small.render('Green', True, BLACK)
+        self.wildcard_green_button = font_small.render('Green', True, GREEN)
         self.wildcard_green_button_rect = self.wildcard_green_button.get_rect()
 
-        self.wildcard_blue_button = font_small.render('Blue', True, BLACK)
+        self.wildcard_blue_button = font_small.render('Blue', True, BLUE)
         self.wildcard_blue_button_rect = self.wildcard_blue_button.get_rect()
 
-        self.wildcard_yellow_button = font_small.render('Yellow', True, BLACK)
+        self.wildcard_yellow_button = font_small.render('Yellow', True, YELLOW)
         self.wildcard_yellow_button_rect = self.wildcard_yellow_button.get_rect()
 
-        # self.wildcard_red_button_rect[0] = current_player_rect.centerx - 10 - self.wildcard_green_button_rect[2] - 20 - self.wildcard_red_button[2]
-        # self.wildcard_green_button_rect[0] = current_player_rect.centerx - 10 - self.wildcard_green_button_rect[2]
-        # self.wildcard_blue_button_rect[0] = current_player_rect.centerx + 10
-        # self.wildcard_yellow_button_rect[0] = current_player_rect.centerx + 10 + self.wildcard_blue_button_rect[2] + 20
+    def wildcard(self):
+        current_player = turn_handler.current_player
+        if (isinstance(current_player, human_player)):
+            current_player_rect = turn_handler.current_player.rect
 
+            button_y = current_player_rect.centery - (self.wildcard_red_button_rect[3]/2)
 
-        self.choose_wildcard = True
+            self.wildcard_red_button_rect[0] = current_player_rect.centerx - 10 - self.wildcard_green_button_rect[2] - 20 - self.wildcard_red_button_rect[2]
+            self.wildcard_red_button_rect[1] = button_y
 
-        play_card(blank_cards[color])
+            self.wildcard_green_button_rect[0] = current_player_rect.centerx - 10 - self.wildcard_green_button_rect[2]
+            self.wildcard_green_button_rect[1] = button_y
+
+            self.wildcard_blue_button_rect[0] = current_player_rect.centerx + 10
+            self.wildcard_blue_button_rect[1] = button_y
+
+            self.wildcard_yellow_button_rect[0] = current_player_rect.centerx + 10 + self.wildcard_blue_button_rect[2] + 20
+            self.wildcard_yellow_button_rect[1] = button_y
+
+            self.choose_wildcard = True
+        elif (isinstance(current_player, ai_player)):
+            play_card(blank_cards[current_player.choose_color()])
 
     def reverse(self):
         turn_handler.switch_direction()
@@ -376,17 +417,24 @@ def play_card(card, p=None):
     card[3][1] = screen_rect.centery - (card[3][3] / 2)
     middle.append(card)
 
-    if not card[1].isdigit():
+    if not card[1].isdigit() and card[1] != 'none':
         getattr(special_card_handler, card[1])()
 
     global draw_once
     draw_once = True
 
 
-def take_cards_from_deck(card_count, p=None):
+def take_cards_from_deck(card_count, p=None, only_numerical=False):
     cards = []
     for i in range(card_count):
-        rand_num = random.randint(0, len(deck) - 1)
+        if only_numerical:
+            while True:
+                rand_num = random.randint(0, len(deck) - 1)
+                if deck[rand_num][1].isdigit():
+                    break
+        else:
+            rand_num = random.randint(0, len(deck) - 1)
+
         cards.append(deck[rand_num])
         del deck[rand_num]
 
@@ -422,12 +470,30 @@ def update():
             p = turn_handler.current_player
             if isinstance(p, human_player):
                 if p.rect.collidepoint(mouse_x, mouse_y):
-                    for card in p.hand:
-                        if card[3].collidepoint(mouse_x, mouse_y):
-                            if validate_card(card):
-                                play_card(card, p)
-                                turn_handler.end_turn()
-                            break
+                    if special_card_handler.choose_wildcard:
+                        wildcard_button_pressed = False
+                        if special_card_handler.wildcard_red_button_rect.collidepoint(mouse_x, mouse_y):
+                            play_card(blank_cards["red"])
+                            wildcard_button_pressed = True
+                        elif special_card_handler.wildcard_green_button_rect.collidepoint(mouse_x, mouse_y):
+                            play_card(blank_cards["green"])
+                            wildcard_button_pressed = True
+                        elif special_card_handler.wildcard_blue_button_rect.collidepoint(mouse_x, mouse_y):
+                            play_card(blank_cards["blue"])
+                            wildcard_button_pressed = True
+                        elif special_card_handler.wildcard_yellow_button_rect.collidepoint(mouse_x, mouse_y):
+                            play_card(blank_cards["yellow"])
+                            wildcard_button_pressed = True
+                        if wildcard_button_pressed:
+                            special_card_handler.choose_wildcard = False
+                            turn_handler.end_turn()
+                    else:
+                        for card in p.hand:
+                            if card[3].collidepoint(mouse_x, mouse_y):
+                                if validate_card(card):
+                                    play_card(card, p)
+                                    turn_handler.end_turn()
+                                break
 
                 elif draw_button_rect.collidepoint(mouse_x, mouse_y):
                     take_cards_from_deck(1, p)
@@ -472,9 +538,9 @@ if __name__ == '__main__':
     delta = 1/FPS
     players = [
         human_player(),
-        human_player(),
-        human_player(),
-        human_player()
+        ai_player(),
+        ai_player(),
+        ai_player()
     ]
     player_count = len(players)
     middle = []
@@ -491,7 +557,7 @@ if __name__ == '__main__':
     for p in players:
         take_cards_from_deck(7, p)
 
-    card = take_cards_from_deck(1)[0]
+    card = take_cards_from_deck(1, None, True)[0]
     play_card(card)
 
     #create draw button
