@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/main.py" line="27" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/main.py" line="30" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2e62768-9977-4328-8a40-bbf1098e37a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/UNO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UNO.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/black_+4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/blue_+2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/green_+2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/red_+2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/yellow_+2.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="410" lean-forward="true" selection-start-line="410" selection-end-line="410" />
+            <state relative-caret-position="214">
+              <caret line="446" column="22" selection-start-line="446" selection-start-column="22" selection-end-line="446" selection-end-column="22" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -58,6 +60,7 @@
       <find>enum</find>
       <find>player_count</find>
       <find>take_cards_from_deck</find>
+      <find>font_big</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -224,6 +227,14 @@
       <option name="presentableId" value="Default" />
       <updated>1574495714281</updated>
     </task>
+    <task id="LOCAL-00001" summary="idk">
+      <created>1574834643769</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1574834643769</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -240,7 +251,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
@@ -248,6 +259,10 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="idk" />
+    <option name="LAST_COMMIT_MESSAGE" value="idk" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/card game/clubs.png" />
@@ -258,8 +273,8 @@
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/random.py" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="410" lean-forward="true" selection-start-line="410" selection-end-line="410" />
+        <state relative-caret-position="214">
+          <caret line="446" column="22" selection-start-line="446" selection-start-column="22" selection-end-line="446" selection-end-column="22" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
