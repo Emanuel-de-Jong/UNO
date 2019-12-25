@@ -30,4 +30,4 @@
 
 
 ## Screenshots
-![Game](https://raw.githubusercontent.com/Emanuel-de-Jong/UNO/master/Screenshots/Game.png)
+![Game](/Screenshots/Game.png)
