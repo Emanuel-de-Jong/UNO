@@ -1,7 +1,8 @@
 # UNO
  
  ## Description
-
+This project shows my way of Object-oriented Programming well.
+It's essentially just the popular UNO game.
 
 
 ## Information
