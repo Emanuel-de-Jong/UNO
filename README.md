@@ -26,7 +26,7 @@
 - Main features missing: 
 	- Bots with intelligence
 	- A win system
-	- 
+	- Only showing the cards of the player who's turn it is
 
 
 ## Screenshots
