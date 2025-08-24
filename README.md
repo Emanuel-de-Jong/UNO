@@ -1,17 +1,19 @@
 # UNO
- 
- ## Description
-This project shows my way of Object-oriented Programming well.
-It's essentially just the popular UNO game.
+UNO, the card game, written in Python. This project shows my way of Object-oriented Programming well.
 
+**Active Development:** <br>
+**Last Change:** <br>
+
+| | |
+| :---: | :---: |
+| ![](/Screenshots/1-Game.png) | ![](/Screenshots/.png) |
 
 ## Information
 - Type: Game
 - Language: English
 - Programming languages: Python
 - Frameworks and libraries: Pygame
-	
-	
+
 ## Progress
 - Start date: 24.11.19
 - Last change: 28.11.19
@@ -28,7 +30,3 @@ It's essentially just the popular UNO game.
 	- Bots with intelligence
 	- A win system
 	- Only showing the cards of the player who's turn it is
-
-
-## Screenshots
-![Game](/Screenshots/Game.png)
