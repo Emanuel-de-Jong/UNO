@@ -15,8 +15,8 @@ UNO, the card game, written in Python. This project shows my way of Object-orien
 - Frameworks and libraries: Pygame
 
 ## Progress
-- Start date: 24.11.19
-- Last change: 28.11.19
+- Start date: 2019-11-24
+- Last change: 2019-11-28
 - Activity status: Abandoned
 - Reason activity status: To be honest, I had a different project I was more interested in
 - Completion status: 70%
