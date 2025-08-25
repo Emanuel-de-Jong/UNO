@@ -1,8 +1,8 @@
 # UNO
 UNO, the card game, written in Python. This project shows my way of Object-oriented Programming well.
 
-**Active Development:** <br>
-**Last Change:** <br>
+**Active Development:** 2019-11-24 - 2019-11-27<br>
+**Last Change:** 2019-11-27<br>
 
 | | |
 | :---: | :---: |
@@ -15,9 +15,7 @@ UNO, the card game, written in Python. This project shows my way of Object-orien
 - Frameworks and libraries: Pygame
 
 ## Progress
-- Start date: 2019-11-24
-- Last change: 2019-11-28
-- Activity status: Abandoned
+- Activity status: Archived
 - Reason activity status: To be honest, I had a different project I was more interested in
 - Completion status: 70%
 - Useable: No
