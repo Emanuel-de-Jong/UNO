@@ -28,3 +28,4 @@ UNO, the card game, written in Python. This project shows my way of Object-orien
 	- Bots with intelligence
 	- A win system
 	- Only showing the cards of the player who's turn it is
+ 
